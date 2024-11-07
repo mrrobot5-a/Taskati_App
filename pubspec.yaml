@@ -10,8 +10,14 @@ dependencies:
   flutter:
     sdk: flutter
   gap: ^3.0.1
+  #image Picker
   image_picker: ^1.0.7
+  #lottie Package
   lottie: ^2.6.0
+  #hive package
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+ 
 
 dev_dependencies:
   flutter_test:
