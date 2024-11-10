@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/services/app_local_storage.dart';
 import 'package:flutter_application_1/feature/Screens/Homepage.dart';
 import 'package:flutter_application_1/feature/intro/splash.dart';
 import 'package:flutter_application_1/feature/upload/upload.dart';
@@ -11,6 +12,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('user');
+  await AppLocalStorage.init();
 
   runApp(const MainApp());
 }

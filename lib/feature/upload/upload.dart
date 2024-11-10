@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/constants/fontFamily.dart';
 import 'package:flutter_application_1/core/functions/dialogs.dart';
 import 'package:flutter_application_1/core/functions/navigation.dart';
+import 'package:flutter_application_1/core/services/app_local_storage.dart';
 import 'package:flutter_application_1/core/utils/colors.dart';
 import 'package:gap/gap.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -47,9 +48,10 @@ class _UploadScreenState extends State<UploadScreen> {
                   showErrorMessage(context, "Please Select an Image");
                 } else {
                   //* cache the data
-                  var box = Hive.box('user');
-                  await box.put('name', name);
-                  String text = box.get("name");
+                  AppLocalStorage.cacheDate(AppLocalStorage.namekey, name);
+                  AppLocalStorage.cacheDate(AppLocalStorage.imageKey, path);
+                  AppLocalStorage.cacheDate(AppLocalStorage.isUpload, true);
+
                   pushReplacement(context, HomePage());
                 }
               },

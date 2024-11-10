@@ -6,19 +6,27 @@ import 'package:flutter_application_1/core/utils/colors.dart';
 class CustomButton extends StatelessWidget {
   String? text;
   Color? color;
+  double? width;
+  double? height;
+  double? fontSize;
+  FontWeight? fontWeight;
   final Function() onPressed;
   CustomButton({
     required this.onPressed,
     required this.text,
     this.color,
+    this.height,
+    this.width,
+    this.fontSize,
+    this.fontWeight,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 260,
-      height: 50,
+      width: width ?? 260,
+      height: height ?? 50,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             // elevation: 5,
@@ -32,9 +40,9 @@ class CustomButton extends StatelessWidget {
           child: Text(
             text!,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: fontSize ?? 20,
               fontFamily: "poppins",
-              fontWeight: FontWeight.bold,
+              fontWeight: fontWeight ?? FontWeight.bold,
             ),
           )),
     );

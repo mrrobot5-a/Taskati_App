@@ -4,7 +4,7 @@ import 'colors.dart';
 
 TextStyle getTitle({Color? color, double? fontsize, FontWeight? fontweight}) {
   return TextStyle(
-    color: AppColor.black ?? color,
+    color: color ?? AppColor.black,
     fontFamily: "poppins",
     fontSize: fontsize ?? 40,
     fontWeight: fontweight ?? FontWeight.bold,
@@ -14,7 +14,7 @@ TextStyle getTitle({Color? color, double? fontsize, FontWeight? fontweight}) {
 TextStyle getSmallTitle(
     {Color? color, double? fontsize, FontWeight? fontweight}) {
   return TextStyle(
-    color: AppColor.grey ?? color,
+    color: color ?? AppColor.grey,
     fontFamily: "poppins",
     fontSize: fontsize ?? 18,
     fontWeight: fontweight ?? FontWeight.w300,

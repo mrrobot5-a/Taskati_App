@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/functions/navigation.dart';
+import 'package:flutter_application_1/core/services/app_local_storage.dart';
 import 'package:flutter_application_1/core/utils/TextStyle.dart';
 import 'package:flutter_application_1/core/utils/colors.dart';
+import 'package:flutter_application_1/feature/Screens/Homepage.dart';
 import 'package:flutter_application_1/feature/upload/upload.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
@@ -19,9 +21,15 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
+    bool isUploaded =
+        AppLocalStorage.getCachedData(AppLocalStorage.isUpload) ?? false;
+
     Future.delayed(Duration(seconds: 2), () {
-      // Navigate to the main app after the splash screen
-      pushReplacement(context, UploadScreen());
+      if (isUploaded) {
+        pushReplacement(context, HomePage());
+      } else {
+        pushReplacement(context, UploadScreen());
+      }
     });
   }
 
