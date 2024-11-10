@@ -15,6 +15,8 @@ import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../core/widgets/TaskItem.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -28,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(13.0),
           child: Column(
             children: [
               AppBarHome(),
@@ -40,6 +42,80 @@ class _HomePageState extends State<HomePage> {
                 DateTime.now(),
                 initialSelectedDate: DateTime.now(),
                 selectionColor: AppColor.primary,
+              ),
+              Gap(20),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return Dismissible(
+                      background: Container(
+                        margin: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Complete",
+                                style: TextStyle(
+                                  fontFamily: FontFamily.fontFamilyName,
+                                  fontSize: 24,
+                                  color: AppColor.white,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.done,
+                                color: AppColor.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      secondaryBackground: Container(
+                        margin: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: AppColor.red,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Delete",
+                                style: TextStyle(
+                                  fontFamily: FontFamily.fontFamilyName,
+                                  fontSize: 24,
+                                  color: AppColor.white,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.delete,
+                                color: AppColor.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      
+                     
+                     
+                      key: UniqueKey(),
+                      child: TaskItem(),
+                    );
+                  },
+                ),
               ),
             ],
           ),

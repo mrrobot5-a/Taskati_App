@@ -3,9 +3,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/functions/navigation.dart';
 import 'package:flutter_application_1/core/services/app_local_storage.dart';
 import 'package:flutter_application_1/core/utils/colors.dart';
 import 'package:flutter_application_1/core/widgets/customButton.dart';
+import 'package:flutter_application_1/feature/addTask/taskHome.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 
@@ -44,13 +46,15 @@ class TodayHeader extends StatelessWidget {
           ),
           Spacer(),
           CustomButton(
-            onPressed: () {},
+            onPressed: () {
+              pushTo(context, TaskHome());
+            },
             text: "+ Add Task",
             fontWeight: FontWeight.w500,
             fontSize: 18,
             width: 140,
             height: 50,
-          )
+          ),
         ],
       ),
     );
