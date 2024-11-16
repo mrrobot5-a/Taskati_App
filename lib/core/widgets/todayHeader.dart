@@ -47,7 +47,7 @@ class TodayHeader extends StatelessWidget {
           Spacer(),
           CustomButton(
             onPressed: () {
-              pushTo(context, TaskHome());
+              pushReplacement(context, TaskHome());
             },
             text: "+ Add Task",
             fontWeight: FontWeight.w500,
