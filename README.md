@@ -28,6 +28,26 @@ The `OnlineContacts` widget displays:
       <br>
       <b>Upload Screen</b>
     </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/baee4616-28bc-43da-88d1-82b2467256c9" width="200">
+      <br>
+      <b>Home Page</b>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/65c59b25-95c9-4dfc-8a1b-846f7cfde84f" width="200">
+      <br>
+      <b>Add Task </b>
+    </td>
+    <td align="center">
+      <img src= "https://github.com/user-attachments/assets/77ebd2cd-0380-4961-88e9-a1cebde35be2" width="200">
+      <br>
+      <b>Date Picker</b>
+    </td>
+    <td align="center">
+      <img src= "https://github.com/user-attachments/assets/9932f3b3-c1aa-45f1-bb80-6e40d6f85c16" width="200">
+      <br>
+      <b>Time Picker</b>
+    </td>
   </tr>
 </table>
 
