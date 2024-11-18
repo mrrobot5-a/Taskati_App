@@ -4,6 +4,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/constants/fontFamily.dart';
+import 'package:flutter_application_1/core/model/TaskModel.dart';
+import 'package:flutter_application_1/core/services/app_local_storage.dart';
+import 'package:flutter_application_1/core/widgets/custom_text_field.dart';
 import 'package:flutter_application_1/feature/Screens/Homepage.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
@@ -298,7 +301,23 @@ class _TaskHomeState extends State<TaskHome> {
                     CustomButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
+                          String id =
+                              DateTime.now().toString() + titleController.text;
+                          AppLocalStorage.cacheTaskDate(
+                            id,
+                            TaskModel(
+                                id: id,
+                                selectedcolor: selectedColor,
+                                title: titleController.text,
+                                note: noteController.text,
+                                date: dateController.text,
+                                startTime: startTimeController.text,
+                                endTime: endTimeController.text,
+                                isCompleted: false),
+                          );
                           pushReplacement(context, HomePage());
+                          // print(
+                          // AppLocalStorage.getCachedTaskData(id)?.title ?? " ");
                         }
                       },
                       text: "Create Task",
@@ -311,83 +330,6 @@ class _TaskHomeState extends State<TaskHome> {
                 ),
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomTextFromField extends StatelessWidget {
-  TextEditingController? controller = TextEditingController();
-  Function? onTap;
-  String? noteText;
-  int? maxlines;
-  bool? isReadOnly = false;
-  Icon? suffixIcons;
-  final String? Function(String?)? validatorFunction;
-
-  // void ontap;
-  CustomTextFromField({
-    super.key,
-    this.noteText,
-    this.maxlines,
-    this.isReadOnly,
-    this.suffixIcons,
-    this.controller,
-    this.validatorFunction,
-    this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      onTap: () {
-        onTap?.call();
-      },
-      validator: validatorFunction,
-      controller: controller,
-      readOnly: isReadOnly ?? false,
-      maxLines: maxlines ?? 1,
-      onChanged: (value) {
-        // Handle title input
-      },
-      decoration: InputDecoration(
-        suffixIcon: suffixIcons ?? null,
-        suffixIconColor: AppColor.primary,
-        labelText: noteText ?? "",
-        alignLabelWithHint: true,
-        labelStyle: TextStyle(
-          fontFamily: FontFamily.fontFamilyName,
-          color: AppColor.primary,
-          fontSize: 18,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide(
-            color: AppColor.grey,
-            width: 1.0,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide(
-            color: AppColor.primary,
-            width: 1.0,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide(
-            color: AppColor.red,
-            width: 1.0,
-          ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide(
-            color: AppColor.red,
-            width: 1.0,
           ),
         ),
       ),

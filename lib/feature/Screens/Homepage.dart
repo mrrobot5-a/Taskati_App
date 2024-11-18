@@ -15,6 +15,7 @@ import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../core/model/TaskModel.dart';
 import '../../core/widgets/TaskItem.dart';
 
 class HomePage extends StatefulWidget {
@@ -45,74 +46,79 @@ class _HomePageState extends State<HomePage> {
               ),
               Gap(20),
               Expanded(
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Dismissible(
-                      background: Container(
-                        margin: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "Complete",
-                                style: TextStyle(
-                                  fontFamily: FontFamily.fontFamilyName,
-                                  fontSize: 24,
-                                  color: AppColor.white,
+                child: ValueListenableBuilder(
+                  valueListenable: AppLocalStorage.userTask.listenable(),
+                  builder: (context, box, child) {
+                    List<TaskModel> tasks = box.values.toList();
+                    // AppLocalStorage.getCachedTaskData(tasks);
+
+                    return ListView.builder(
+                      itemCount: tasks.length,
+                      itemBuilder: (context, index) {
+                        return Dismissible(
+                          background: Container(
+                            margin: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "Complete",
+                                    style: TextStyle(
+                                      fontFamily: FontFamily.fontFamilyName,
+                                      fontSize: 24,
+                                      color: AppColor.white,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.done,
-                                color: AppColor.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      secondaryBackground: Container(
-                        margin: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: AppColor.red,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "Delete",
-                                style: TextStyle(
-                                  fontFamily: FontFamily.fontFamilyName,
-                                  fontSize: 24,
-                                  color: AppColor.white,
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    Icons.done,
+                                    color: AppColor.white,
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.delete,
-                                color: AppColor.white,
-                              ),
+                          ),
+                          secondaryBackground: Container(
+                            margin: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              color: AppColor.red,
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ],
-                        ),
-                      ),
-                      
-                     
-                     
-                      key: UniqueKey(),
-                      child: TaskItem(),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "Delete",
+                                    style: TextStyle(
+                                      fontFamily: FontFamily.fontFamilyName,
+                                      fontSize: 24,
+                                      color: AppColor.white,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    Icons.delete,
+                                    color: AppColor.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          key: UniqueKey(),
+                          child: TaskItem(),
+                        );
+                      },
                     );
                   },
                 ),

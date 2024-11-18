@@ -47,7 +47,10 @@ class TodayHeader extends StatelessWidget {
           Spacer(),
           CustomButton(
             onPressed: () {
-              pushReplacement(context, TaskHome());
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TaskHome()),
+              );
             },
             text: "+ Add Task",
             fontWeight: FontWeight.w500,

@@ -13,6 +13,8 @@ import 'core/model/TaskModel.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  Hive.registerAdapter(TaskModelAdapter());
+
   await Hive.openBox('user');
   await Hive.openBox<TaskModel>('task');
   await AppLocalStorage.init();
