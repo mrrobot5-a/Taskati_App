@@ -14,6 +14,8 @@ import 'package:flutter_application_1/core/widgets/todayHeader.dart';
 import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../core/model/TaskModel.dart';
 import '../../core/widgets/TaskItem.dart';
@@ -26,6 +28,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String selectedDate = DateFormat('dd/MM/yyyy').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,19 +46,79 @@ class _HomePageState extends State<HomePage> {
                 DateTime.now(),
                 initialSelectedDate: DateTime.now(),
                 selectionColor: AppColor.primary,
+                onDateChange: (date) {
+                  setState(() {
+                    selectedDate = DateFormat('dd/MM/yyyy').format(date);
+                  });
+                  // DateTime.now()
+                },
               ),
               Gap(20),
               Expanded(
                 child: ValueListenableBuilder(
                   valueListenable: AppLocalStorage.userTask.listenable(),
                   builder: (context, box, child) {
-                    List<TaskModel> tasks = box.values.toList();
-                    // AppLocalStorage.getCachedTaskData(tasks);
+                    List<TaskModel> tasks = [];
+                    box.values.forEach((element) {
+                      if (element.date == selectedDate) {
+                        tasks.add(element);
+                      }
+                    });
+                    if (tasks.isEmpty) {
+                      return Column(
+                        children: [
+                          Lottie.asset(
+                            "assets/images/intro.json",
+                            width: 300,
+                          ),
+                          Text(
+                            "No tasks found for ${selectedDate}",
+                            style: TextStyle(
+                              fontFamily: FontFamily.fontFamilyName,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      );
+                    }
 
                     return ListView.builder(
                       itemCount: tasks.length,
                       itemBuilder: (context, index) {
                         return Dismissible(
+                          onDismissed: (direction) {
+                            if (direction == DismissDirection.startToEnd) {
+                              //complete Task
+                              box.put(
+                                tasks[index].id,
+                                TaskModel(
+                                  id: tasks[index].id,
+                                  title: tasks[index].title,
+                                  date: tasks[index].date,
+                                  isCompleted: true,
+                                  note: tasks[index].note,
+                                  selectedcolor: -1,
+                                  startTime: tasks[index].startTime,
+                                  endTime: tasks[index].endTime,
+                                ),
+                              );
+                            } else {
+                              box.delete(tasks[index].id);
+                              box.put(
+                                tasks[index].id,
+                                TaskModel(
+                                  id: tasks[index].id,
+                                  title: tasks[index].title,
+                                  date: tasks[index].date,
+                                  isCompleted: false,
+                                  note: tasks[index].note,
+                                  selectedcolor: -2,
+                                  startTime: tasks[index].startTime,
+                                  endTime: tasks[index].endTime,
+                                ),
+                              );
+                            }
+                          },
                           background: Container(
                             margin: EdgeInsets.all(5),
                             decoration: BoxDecoration(
@@ -116,7 +179,9 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           key: UniqueKey(),
-                          child: TaskItem(),
+                          child: TaskItem(
+                            taskModel: tasks[index],
+                          ),
                         );
                       },
                     );

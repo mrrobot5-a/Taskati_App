@@ -29,7 +29,7 @@ class _TaskHomeState extends State<TaskHome> {
   var titleController = TextEditingController();
   var noteController = TextEditingController();
   var dateController = TextEditingController(
-    text: DateFormat('dd/mm/yyyy').format(DateTime.now()),
+    text: DateFormat('dd/MM/yyyy').format(DateTime.now()),
   );
   var startTimeController = TextEditingController(
     text: DateFormat('hh:mm').format(DateTime.now()),
