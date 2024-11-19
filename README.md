@@ -43,11 +43,31 @@ The `OnlineContacts` widget displays:
       <br>
       <b>Date Picker</b>
     </td>
+  </tr>
+  <tr>
     <td align="center">
       <img src= "https://github.com/user-attachments/assets/9932f3b3-c1aa-45f1-bb80-6e40d6f85c16" width="200">
       <br>
       <b>Time Picker</b>
     </td>
+      <td align="center">
+      <img src= "https://github.com/user-attachments/assets/a93cdcd5-08f2-4c71-936e-293f2921310a" width="200">
+      <br>
+      <b>Complete Task</b>
+    </td>
+    </td>
+      <td align="center">
+      <img src= "https://github.com/user-attachments/assets/54ffd1cb-5d72-4499-8f68-3e1fc073d7d3" width="200">
+      <br>
+      <b>Change image</b>
+    </td>    
+     </td>
+      <td align="center">
+      <img src= "https://github.com/user-attachments/assets/629dd1a1-dbce-4f8b-a264-13d9f8ac94d0" width="200">
+      <br>
+      <b>Change name</b>
+    </td>     
+
   </tr>
 </table>
 
