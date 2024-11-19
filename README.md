@@ -10,7 +10,8 @@ The `OnlineContacts` widget displays:
 - Each contact’s name (first name only), with overflow handling to maintain a clean layout
 
 ## 📸 Preview
-<!--<img src="https://github.com/user-attachments/assets/fd23b639-018f-44fa-b00e-5a7d3b94d4dc" width="600"> -->
+# Video of Taskati App 
+<img src="https://github.com/user-attachments/assets/6323c138-2d56-4bed-ac2e-44dec14f3cc0" width="600"> 
 
 ## Screens 
 
