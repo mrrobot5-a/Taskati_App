@@ -8,11 +8,16 @@ import 'package:flutter_application_1/core/utils/colors.dart';
 import '../../feature/Screens/ChangeName.dart';
 import '../utils/TextStyle.dart';
 
-class AppBarHome extends StatelessWidget {
+class AppBarHome extends StatefulWidget {
   const AppBarHome({
     super.key,
   });
 
+  @override
+  State<AppBarHome> createState() => _AppBarHomeState();
+}
+
+class _AppBarHomeState extends State<AppBarHome> {
   @override
   Widget build(BuildContext context) {
     return Row(

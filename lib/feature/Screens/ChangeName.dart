@@ -9,7 +9,9 @@ import 'package:flutter_application_1/core/widgets/customButton.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../core/functions/dialogs.dart';
 import '../../core/services/app_local_storage.dart';
+import '../../core/widgets/custom_text_field.dart';
 
 class ChangeName extends StatefulWidget {
   const ChangeName({super.key});
@@ -20,6 +22,7 @@ class ChangeName extends StatefulWidget {
 
 class _ChangeNameState extends State<ChangeName> {
   String? path;
+  String name = "";
 
   @override
   Widget build(BuildContext context) {
@@ -62,38 +65,39 @@ class _ChangeNameState extends State<ChangeName> {
             GestureDetector(
               onTap: () {
                 showModalBottomSheet(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    context: context,
-                    builder: (context) {
-                      return Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Gap(15),
-                            CustomButton(
-                              width: double.infinity,
-                              onPressed: () async {
-                                await uploadImage(isCamera: false);
-                              },
-                              text: "Upload From Camera ",
-                            ),
-                            Gap(15),
-                            CustomButton(
-                              width: double.infinity,
-                              onPressed: () async {
-                                await uploadImage(isCamera: false);
-                              },
-                              text: "Upload From Gallery ",
-                            ),
-                            Gap(15),
-                          ],
-                        ),
-                      );
-                    });
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  context: context,
+                  builder: (context) {
+                    return Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Gap(15),
+                          CustomButton(
+                            width: double.infinity,
+                            onPressed: () async {
+                              await uploadImage(isCamera: true);
+                            },
+                            text: "Upload From Camera ",
+                          ),
+                          Gap(15),
+                          CustomButton(
+                            width: double.infinity,
+                            onPressed: () async {
+                              await uploadImage(isCamera: false);
+                            },
+                            text: "Upload From Gallery ",
+                          ),
+                          Gap(15),
+                        ],
+                      ),
+                    );
+                  },
+                );
               },
               child: Stack(
                 children: [
@@ -155,17 +159,62 @@ class _ChangeNameState extends State<ChangeName> {
                       ),
                     ),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showModalBottomSheet(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                            context: context,
+                            builder: (context) {
+                              return Padding(
+                                padding: const EdgeInsets.all(24.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    CustomTextFromField(
+                                      onchanged: (value) {
+                                        setState(() {
+                                          name = value;
+                                        });
+                                      },
+                                    ),
+                                    Gap(20),
+                                    CustomButton(
+                                      onPressed: () async {
+                                        if (name.isEmpty) {
+                                          showErrorMessage(context,
+                                              "Please enter a name and Select an Image");
+                                        } else {
+                                          setState(() {
+                                            AppLocalStorage.cacheDate(
+                                                AppLocalStorage.namekey, name);
+                                          });
+                                          Navigator.pop(context);
+                                          //* cache the data
+                                        }
+                                      },
+                                      text: "Update Your Name",
+                                      width: double.infinity,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            });
+                      },
                       icon: Icon(
                         Icons.edit,
                         size: 28,
                         color: AppColor.primary,
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
+            Text("a"),
           ],
         ),
       ),

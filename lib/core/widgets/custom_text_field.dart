@@ -4,7 +4,8 @@ import 'package:flutter_application_1/core/utils/colors.dart';
 
 class CustomTextFromField extends StatelessWidget {
   TextEditingController? controller = TextEditingController();
-  Function? onTap;
+  VoidCallback? onTap;
+  final ValueChanged<String>? onchanged; // Updated type
   String? noteText;
   int? maxlines;
   bool? isReadOnly = false;
@@ -21,21 +22,18 @@ class CustomTextFromField extends StatelessWidget {
     this.controller,
     this.validatorFunction,
     this.onTap,
+    this.onchanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onTap: () {
-        onTap?.call();
-      },
+      onTap: onTap,
       validator: validatorFunction,
       controller: controller,
       readOnly: isReadOnly ?? false,
       maxLines: maxlines ?? 1,
-      onChanged: (value) {
-        // Handle title input
-      },
+      onChanged: onchanged,
       decoration: InputDecoration(
         suffixIcon: suffixIcons ?? null,
         suffixIconColor: AppColor.primary,

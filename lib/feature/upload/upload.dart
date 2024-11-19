@@ -149,9 +149,11 @@ class _UploadScreenState extends State<UploadScreen> {
                     ),
                   ),
                   onChanged: (value) {
-                    setState(() {
-                      name = value;
-                    });
+                    setState(
+                      () {
+                        name = value;
+                      },
+                    );
                   },
                 ),
               ),

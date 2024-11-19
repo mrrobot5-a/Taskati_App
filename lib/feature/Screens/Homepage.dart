@@ -34,7 +34,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(13.0),
+          padding: const EdgeInsets.only(
+            top: 30.0,
+            left: 14,
+            right: 14,
+            bottom: 14,
+          ),
           child: Column(
             children: [
               AppBarHome(),

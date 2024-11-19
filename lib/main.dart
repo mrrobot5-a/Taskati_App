@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/services/app_local_storage.dart';
+import 'package:flutter_application_1/core/utils/colors.dart';
 import 'package:flutter_application_1/feature/Screens/Homepage.dart';
 import 'package:flutter_application_1/feature/intro/splash.dart';
 import 'package:flutter_application_1/feature/upload/upload.dart';
@@ -27,7 +30,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Splash(),
     );
